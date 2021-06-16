@@ -1,0 +1,93 @@
+{
+	"info": {
+		"_postman_id": "061ffbcb-e7e1-41bd-be72-5ab955a17cce",
+		"name": "Assignment_28",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "HelloJWT",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8086/hello",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8086",
+					"path": [
+						"hello"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GenerateToken",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "user",
+							"value": "sebas",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "passwd",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8086/user",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8086",
+					"path": [
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "WithToken",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJzb2Z0dGVrSldUIiwic3ViIjoic2ViYXMiLCJhdXRob3JpdGllcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNjIzNzIzNzU1LCJleHAiOjE2MjM3MjQzNTV9.aQIVF-utMJ6--xOQc5Kezg--L5VYSegFa1QDqUISz_BLa9GM9GI4_FMcIG7Ic3YAU1fWuyfk_NrA_R_ULo-oCA",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8086/hello?name=shilpa",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8086",
+					"path": [
+						"hello"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "shilpa"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,120 @@
+{
+	"info": {
+		"_postman_id": "0b4b0365-1eb2-4acf-8b64-f47c4ef67708",
+		"name": "Assignment_27",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "SearchMovie",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;\r",
+							"tests[\"Has title Titanic\"] = responseBody.has(\"Title\");\r",
+							"tests[\"IMDB id\"] = responseBody.has(\"imdbID\");\r",
+							"var jsonData = JSON.parse(responseBody);\r",
+							"pm.environment.set(\"imdbID\", jsonData.imdbID);\r",
+							"pm.environment.set(\"Title\", jsonData.Title);\r",
+							"pm.environment.set(\"Ratings\", jsonData.Ratings[0].Value);\r",
+							"pm.test(\"Movie name verified\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Titanic\");\r",
+							"});\r",
+							"pm.test(\"Ratings verified\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"7.8/10\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://www.omdbapi.com/?t=titanic&apikey=8254981a",
+					"protocol": "http",
+					"host": [
+						"www",
+						"omdbapi",
+						"com"
+					],
+					"path": [
+						""
+					],
+					"query": [
+						{
+							"key": "t",
+							"value": "titanic"
+						},
+						{
+							"key": "apikey",
+							"value": "8254981a"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "searchmovieById",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;\r",
+							"tests[\"Has title\"] = responseBody.has(\"Title\");\r",
+							"tests[\"IMDB id\"] = responseBody.has(\"imdbID\");\r",
+							"var jsonData = JSON.parse(responseBody);\r",
+							"tests[\"Test to verify title in response\"] = jsonData.Title==\"Titanic\";\r",
+							"pm.environment.set(\"imdbID\", jsonData.imdbID);\r",
+							"pm.environment.set(\"Title\", jsonData.Title);\r",
+							"pm.environment.set(\"Ratings\", jsonData.Ratings[0].Value);\r",
+							"pm.test(\"Movie name varified\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.Title).to.eql(\"Titanic\");\r",
+							"});\r",
+							"pm.test(\"Ratings varified\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.Ratings[0].Value).to.eql(\"7.8/10\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://www.omdbapi.com/?i={{imdbID}}&apikey=8254981a",
+					"protocol": "http",
+					"host": [
+						"www",
+						"omdbapi",
+						"com"
+					],
+					"path": [
+						""
+					],
+					"query": [
+						{
+							"key": "i",
+							"value": "{{imdbID}}"
+						},
+						{
+							"key": "apikey",
+							"value": "8254981a"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

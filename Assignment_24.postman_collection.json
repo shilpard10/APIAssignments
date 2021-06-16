@@ -1,0 +1,269 @@
+{
+	"info": {
+		"_postman_id": "0ab8d4c9-3577-4869-8a55-10792e1b085d",
+		"name": "Assignment 24",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get All Employees",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							" var randomNumber = getRandomInt(10000, 11000);\r",
+							" var no = getRandomInt(10, 90);\r",
+							"\r",
+							" function getRandomInt(min, max) {\r",
+							" return Math.floor(Math.random() * (max - min + 1)) + min;\r",
+							" }\r",
+							" var fname=\"F\"+randomNumber;\r",
+							" var lname=\"L\"+randomNumber;\r",
+							" postman.setEnvironmentVariable(\"first_name\",fname);\r",
+							" postman.setEnvironmentVariable(\"last_name\",lname);\r",
+							" postman.setEnvironmentVariable(\"email\",fname+\".\"+lname+\"@\"+\"reqres.in\");\r",
+							"  //  \"avatar\": \"https://reqres.in/img/faces/7-image.jpg\"\r",
+							" postman.setEnvironmentVariable(\"avatar\",\"https://reqres.in/img/faces/\"+no+\"-image.jpg\");\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://reqres.in/api/users?page=2",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Employee",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"{{email}}\",\r\n    \"first_name\": \"{{first_name}}\",\r\n    \"last_name\": \"{{last_name}}\",\r\n    \"avatar\": \"{{avatar}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{protocol}}://{{url}}/api/users",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllEmpDummyAPI",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"//  var randomNumber = getRandomInt(10000, 11000);\r",
+							"\r",
+							"//  function getRandomInt(min, max) {\r",
+							"//  return Math.floor(Math.random() * (max - min + 1)) + min;\r",
+							"//  }\r",
+							"//  postman.setEnvironmentVariable(\"name\", \"samplename_\"+randomNumber);\r",
+							"//  postman.setEnvironmentVariable(\"salary\", getRandomInt(10000, 11000));\r",
+							"// postman.setEnvironmentVariable(\"age\", getRandomInt(18, 60));"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// tests[\"Status code is 200\"] = responseCode.code === 200;\r",
+							"// tests[\"Has Employee Id\"] = responseBody.has(\"id\");\r",
+							"// var jsonData = JSON.parse(responseBody);\r",
+							"// pm.environment.set(\"emp_id\", jsonData.data.id);\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://dummy.restapiexample.com/api/v1/employee/{{empid}}",
+					"protocol": "http",
+					"host": [
+						"dummy",
+						"restapiexample",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"employee",
+						"{{empid}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateEmpoyeeDummyAPI",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;\r",
+							"tests[\"Has Employee Id\"] = responseBody.has(\"id\");\r",
+							"var jsonData = JSON.parse(responseBody);\r",
+							"pm.environment.set(\"emp_id\", jsonData.data.id);\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "// {\r\n// \"name\" : \"{{name}}\",\r\n// \"salary\" : \"{{salary}}\",\r\n// \"age\" : \"{{age}}\"\r\n// }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{protocol}}://{{durl}}/api/v1/create",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{durl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TestEmployeeCreation",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;\r",
+							"tests[\"Has Employee Id\"] = responseBody.has(\"id\");\r",
+							"var jsonData = JSON.parse(responseBody);\r",
+							"pm.environment.set(\"emp_id\", jsonData.data.id);\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{protocol}}://{{durl}}/api/v1/employees",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{durl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"employees"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllEmp",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// var randomNumber = getRandomInt(10000, 11000);\r",
+							"\r",
+							"// function getRandomInt(min, max) {\r",
+							"// return Math.floor(Math.random() * (max - min + 1)) + min;\r",
+							"// }\r",
+							"// postman.setEnvironmentVariable(\"name\", \"samplename_\"+randomNumber);\r",
+							"// postman.setEnvironmentVariable(\"salary\", getRandomInt(10000, 11000));\r",
+							"// postman.setEnvironmentVariable(\"age\", getRandomInt(18, 60));"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		}
+	]
+}
